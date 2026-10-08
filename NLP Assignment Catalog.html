@@ -1,0 +1,164 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>NLP Assignment Catalog</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky filter bar over a single column of collapsible cards; topic chips carry the color coding. */
+:root{
+  --bg:#f7f7f4; --surface:#ffffff; --fg:#1d1f1b; --muted:#5f655c; --line:#d9dcd4; --accent:#2a5d8f; --accent-soft:#e3ecf5;
+  --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --chip-l:92%; --chip-fg-l:28%; --chip-border-l:80%;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15171a;--surface:#1e2125;--fg:#e8e9e4;--muted:#a0a69b;--line:#33373c;--accent:#7fb0e0;--accent-soft:#223243;--chip-l:22%;--chip-fg-l:82%;--chip-border-l:34%;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15171a;--surface:#1e2125;--fg:#e8e9e4;--muted:#a0a69b;--line:#33373c;--accent:#7fb0e0;--accent-soft:#223243;--chip-l:22%;--chip-fg-l:82%;--chip-border-l:34%;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:24px 64px}
+h1{font-size:1.7rem;font-weight:600;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 20px;max-width:65ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:12px;border-bottom:1px solid var(--line);z-index:2;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar select,.bar input{font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);min-width:0}
+.bar input{flex:1 1 160px}
+.bar select{flex:0 1 auto;max-width:100%}
+.bar button{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);cursor:pointer}
+.bar button:hover{border-color:var(--accent)}
+.count{color:var(--muted);font-size:13px;margin-left:auto;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 8px}
+.chip{display:inline-block;font-size:12px;line-height:1.3;padding:2px 8px;border-radius:999px;border:1px solid hsl(var(--h) 45% var(--chip-border-l));background:hsl(var(--h) 60% var(--chip-l));color:hsl(var(--h) 55% var(--chip-fg-l));white-space:nowrap;cursor:pointer}
+.chip.active{outline:2px solid var(--accent);outline-offset:1px}
+.legend .chip{cursor:pointer}
+h2.track{font-size:1.05rem;font-weight:600;margin:28px 0 8px;display:flex;align-items:baseline;gap:10px}
+h2.track small{color:var(--muted);font-weight:400;font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin:0 0 8px}
+details[hidden]{display:none}
+summary{list-style:none;cursor:pointer;padding:12px 14px;display:grid;grid-template-columns:2.2rem 1fr;gap:4px 10px;align-items:baseline}
+summary::-webkit-details-marker{display:none}
+summary .n{font-family:var(--mono);color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+summary .t{font-weight:600}
+summary .chips{grid-column:2;display:flex;flex-wrap:wrap;gap:4px}
+summary .chips .chip{cursor:default}
+details[open] summary{border-bottom:1px solid var(--line)}
+.body{padding:12px 14px 14px 14px;display:grid;gap:10px}
+.row{display:grid;grid-template-columns:7.5rem 1fr;gap:10px}
+.row b{color:var(--muted);font-weight:500;font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding-top:2px}
+.row div{min-width:0}
+code{font-family:var(--mono);font-size:.88em;background:var(--accent-soft);padding:1px 5px;border-radius:4px}
+.empty{color:var(--muted);padding:24px 0;text-align:center}
+.foot{color:var(--muted);font-size:13px;margin-top:32px;max-width:65ch}
+@media (max-width:520px){.row{grid-template-columns:1fr;gap:2px}.count{margin-left:0;flex-basis:100%}}
+@media (prefers-reduced-motion:no-preference){details{transition:border-color .15s}}
+details:focus-within,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<h1>NLP Assignment Catalog</h1>
+<p class="sub">Thirty technique-first briefs for the hands-on part of the course. Each team ships a public GitHub repo and a running service another team can test. Filter by track or topic, open a card for the full brief.</p>
+
+<div class="bar">
+  <select id="track" aria-label="Track">
+    <option value="">All tracks</option>
+    <option value="A">A · Retrieval and documents</option>
+    <option value="B">B · Classification, extraction, evaluation</option>
+    <option value="C">C · Agents, tools and generation</option>
+    <option value="D">D · Models, data and infrastructure</option>
+  </select>
+  <select id="topic" aria-label="Topic"><option value="">All topics</option></select>
+  <input id="q" type="search" placeholder="Search briefs…" aria-label="Search">
+  <button id="expand" type="button">Expand all</button>
+  <button id="collapse" type="button">Collapse all</button>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="legend" id="legend" aria-label="Topic legend"></div>
+<div id="list"></div>
+<p class="foot" id="foot">Topic coverage across the catalog is shown in each legend chip. Evaluation is in every brief by design; the thin topics are carried by the paper presentations and the capstone.</p>
+</div>
+
+<script>
+const TOPICS=[
+"Language, text and NLP tasks","Tokenization and sparse representations","Information theory and statistical LMs","Word and sentence embeddings","Recurrent, seq2seq and latent-variable models","Attention and the transformer","Pretraining and transfer learning","Scaling, data and in-context learning","Decoding and text generation","Post-training: SFT, RLHF, preferences","Evaluation","Robustness, interpretability and safety","Retrieval, RAG and long context","Reasoning, agents and tool use","Efficient and small models","Multimodal and non-autoregressive models"];
+const HUES=[10,32,52,75,100,130,160,185,205,228,250,275,300,325,345,20];
+const TRACKS={A:"Retrieval and documents",B:"Classification, extraction and evaluation",C:"Agents, tools and generation",D:"Models, data and infrastructure"};
+const A=[
+[1,"A","RAG with citations","Chunking, embeddings, vector store, generation that cites the retrieved passage and refuses when nothing relevant is found; a BM25 baseline for comparison.","An unanswerable-question test with a refusal rate.","A Telegram bot for a hobby community's rulebook (board-game, climbing gym, sailing club); a chat over one municipality's public council minutes; a web app answering questions about a hiking region's trail guides.","<code>POST /ask</code> returning answer plus citations over a public corpus; the question set in the repo.",[1,3,8,10,11,12]],
+[2,"A","Hybrid search (lexical + dense + reranker)","BM25 and embeddings fused, then a cross-encoder reranker; latency budget stated and measured.","A query set where each component wins.","Search over 5,000 second-hand listings with typo tolerance; a recipe finder that understands ingredients you have; a search engine for a podcast's transcripts.","<code>GET /search?q=</code> with per-component scores exposed; the indexed public dataset downloadable from the repo.",[1,2,3,5,10,12,14]],
+[3,"A","Document parsing to structured data","PDF/image to text (OCR or vision-language models), then schema-constrained LLM extraction with validation.","Field-level accuracy on 50 documents the team collected.","Photograph receipts into a shared expense sheet; turn restaurant menus into an allergen-filterable app; parse rental listings into a comparison table.","<code>POST /parse</code> taking an image or PDF and returning schema JSON; sample documents and the schema in the repo.",[0,8,10,15]],
+[4,"A","Long-document summarization with structure","Map-reduce or hierarchical summarization, section-aware, with faithfulness checks; compare a pretrained seq2seq model (BART/T5-class) against a long-context LLM and report compression ratio.","Summaries evaluated for missing and invented facts.","A weekly digest of new arXiv papers in one niche; a bot that condenses YouTube lectures into study notes; a summarizer for long Reddit or forum threads.","<code>POST /summarize</code> taking a URL or text, model selectable by parameter; a demo page.",[0,2,4,5,8,10,12]],
+[5,"A","Multimodal search over a public archive","Text and image embeddings (CLIP-style) plus metadata filters over a public collection, served from a small model on cheap hardware.","A filter benchmark and text-to-image retrieval quality on 100 self-labelled queries.","A search over a Wikimedia Commons subset by description; a podcast archive searchable across transcripts and episode art; a museum or city-archive catalogue explorer.","<code>GET /search</code> accepting a text or image query; the index build script and dataset pointer in the repo.",[1,3,12,14,15]],
+[6,"A","Multilingual retrieval","Multilingual embeddings or translate-then-retrieve, evaluated in at least two languages; report tokenizer fertility per language.","Per-language retrieval quality.","A Russian/German/English job-ad matcher; a bot answering visa questions from official pages in the user's language; cross-language product reviews search.","<code>GET /search?q=&amp;lang=</code> over a public multilingual corpus; per-language eval set in the repo.",[0,1,3,5,6,10,12]],
+[7,"A","Semantic diff and change tracking","Alignment of two document versions by meaning, change summary linked to passages; classic edit-distance alignment as baseline.","Reordered-section test.","A terms-of-service change watcher that emails what actually changed; a tracker for a university module handbook; a diff for two drafts of a contract.","<code>POST /diff</code> taking two documents and returning a linked change report; a page with public before/after pairs.",[0,3,8,10,12]],
+[8,"A","Claim verification against sources","Sentence-level entailment (supported/contradicted/unsupported) against a supplied corpus, with a fine-tuned NLI encoder and an LLM compared.","100 hand-labelled sentences.","A fact-check overlay for a news site as a browser extension; a checker for product claims against the manufacturer's spec sheet; a homework-checker for citations in student essays.","<code>POST /verify</code> taking claims plus sources and returning a label and span per sentence; labelled set in the repo.",[0,6,10,11,12,13]],
+[9,"B","Fine-tuned classifier vs. prompted LLM","A TF-IDF/naive-Bayes baseline, a small encoder fine-tuned on team-labelled data, and zero/few-shot prompting, compared on F1, cost and latency.","The trade-off table and 300 self-labelled examples.","A spam and scam filter for Telegram groups; a mood or topic tagger for a journaling app; a routing bot for a student council's inbox.","<code>POST /classify</code> with the backend selectable (baseline, finetuned, llm); labelled data and training script in the repo.",[0,1,2,6,7,10,14]],
+[10,"B","Schema-constrained extraction","Structured output (JSON schema, function calling or grammar-constrained decoding) with validation and confidence per field; a BiLSTM-CRF or token-classification baseline for the core fields; input may be text, voice (ASR) or photos.","Zero invalid outputs on 200 inputs.","Turn voice notes into calendar events and to-dos; extract deal terms from Kleinanzeigen chats; parse gym or running notes into a training log.","<code>POST /extract</code> accepting text, audio or image and returning validated JSON; schema and 200-input test set in the repo.",[0,4,8,10,13,15]],
+[11,"B","LLM-as-judge with calibration","An automatic evaluator plus measured agreement with 100 human labels and checks for position and length bias; relate it to reward models and preference data.","The calibration report.","An essay-feedback tool for language learners; a code-review quality scorer for a student project repo; a rating engine for AI-generated recipe or trip plans.","<code>POST /judge</code> taking an item and a rubric, returning score and rationale; human labels and calibration notebook in the repo.",[7,9,10,11,13]],
+[12,"B","PII and safety guardrail","NER for German and English identifiers (fine-tuned small token classifier and a BiLSTM-CRF baseline), masking, toxicity classification, wrapped as middleware around any model.","200 adversarial inputs and the false-positive rate.","An anonymizer for sharing medical or legal questions online; a moderation layer for a community Discord; a redaction tool for screenshots before posting.","<code>POST /filter</code> returning masked text and flags, plus a proxy mode another team can put in front of their endpoint; adversarial set in the repo.",[0,4,6,10,11,14]],
+[13,"B","Entity extraction and normalization into a graph","NER, linking (sparse and dense candidate retrieval), dedup into a canonical taxonomy, stored as a graph.","Precision/recall on 100 documents.","A skills map from job ads for one profession; a who-knows-whom map from conference programmes; a knowledge graph of a fandom's wiki.","<code>GET /entities?q=</code> and a graph export endpoint; a browsable graph page over a public corpus.",[0,1,3,6,10,12]],
+[14,"B","Stance, sentiment and framing","Aspect-based sentiment or stance detection with rationales; train a BiLSTM and a fine-tuned transformer and compare with a prompted LLM, evaluated against 150 self-labelled paragraphs.","Inter-annotator agreement of the team.","A product-review analyzer by feature (battery, screen, support); a bot tracking how outlets frame one topic; a feedback dashboard for a course or a restaurant.","<code>POST /analyze</code> returning aspects, stance and rationale, model selectable; labelled paragraphs in the repo.",[0,4,5,6,10]],
+[15,"B","Prompt regression testing","Versioned prompts, a golden set, automatic output diffs, CI that fails on regression; study sampling settings and prompt sensitivity.","It running on another team's prompts.","A hosted service where indie developers test prompts before shipping; a GitHub Action; a Slack bot that reports prompt drift after a model update.","A published GitHub Action plus <code>POST /run-suite</code>; a public report page for at least one other team's prompts.",[7,8,10,11]],
+[16,"B","Hallucination and consistency detection","Self-consistency sampling, token-level entropy/perplexity signals and NLI between answer and retrieved context, exposed as a wrapper.","100 labelled answers.","A warning layer for any Track A app; a 'trust score' badge for AI-written product descriptions; a checker for AI-generated study notes against the textbook.","<code>POST /check</code> taking answer plus context and returning flagged spans and a score; wrapper demo on another team's endpoint.",[2,5,8,10,11,12]],
+[17,"C","Text-to-SQL / text-to-query","Schema-aware query generation with few-shot examples, grammar-constrained decoding, read-only execution, show-before-run, 50 gold questions.","Refusal of destructive queries.","Chat over a city's open-data budget; a natural-language interface to a sports league's stats; a query bot for a public transport timetable database.","<code>POST /query</code> returning the SQL and the result over a public demo database; schema, seed data and gold questions in the repo.",[7,8,10,11,13]],
+[18,"C","Tool-using agent with a budget","Function calling, planning loop, hard token and call limits, a trace viewer.","Cost per correct answer on 30 tasks.","A price-drop watcher that browses shops; a travel planner that checks Deutsche Bahn and weather; a bot that finds a restaurant table by reading restaurant sites.","<code>POST /task</code> with a budget parameter returning answer plus full trace; a trace-viewer page; the 30 tasks in the repo.",[7,10,11,13,14]],
+[19,"C","Draft-and-improve loop with human feedback","Generate, let the user edit, log the edit, turn edits into preference pairs and fine-tune (SFT or DPO) a small model against the prompted baseline.","Quality curve over 100 edits.","Reply drafts for a small shop's customer emails; caption generator for an Instagram account; a cover-letter assistant that learns a style guide.","<code>POST /draft</code> and <code>POST /feedback</code>, model selectable (prompted, tuned); the collected preference pairs (synthetic persona) and training script in the repo.",[0,4,6,8,9,10]],
+[20,"C","Form and document filling agent","Reading a form's layout (PDF/vision model), mapping from a profile document, asking only for gaps, zero invented values.","A measured hallucination rate of zero.","German bureaucracy forms from an uploaded profile; grant or scholarship applications; a visa-checklist assistant.","<code>POST /fill</code> taking a form and a profile and returning the filled PDF plus a list of missing fields; synthetic test profiles and public forms in the repo.",[8,10,11,13,15]],
+[21,"C","Constrained bulk generation","Templates plus LLM under hard constraints (length, forbidden claims, required terms), auto-validated at scale; n-gram/MinHash dedup and diversity measured by entropy.","1,000 outputs, 100% constraint pass.","SEO descriptions for an Etsy shop; localized app-store listings; flashcards from a textbook chapter.","<code>POST /generate</code> for batches and <code>POST /validate</code> usable on its own; the 1,000 outputs and validator rules in the repo.",[0,2,8,10,14]],
+[22,"C","Adaptive tutor or coach","A dialogue policy that tracks user state, never reveals answers directly, adapts difficulty; preference data from five real users feeds a second iteration.","Session summaries and the before/after.","A Telegram German-grammar coach; an interview-practice bot for one job type; a chess or music-theory tutor.","A public Telegram bot anyone can message plus <code>GET /session/{id}</code> summaries; the dialogue policy and anonymized logs in the repo.",[0,7,9,10,13]],
+[23,"C","Chat bot with long-term memory","Memory extraction, embedding storage, retrieval, an inspector and a forget command.","A memory-correctness test.","A Discord bot that remembers a gaming clan's history; a study-group bot that remembers who promised what; a group-trip planner that remembers everyone's constraints.","A bot running in a public test server plus <code>GET /memory/{user}</code> inspector and <code>DELETE</code> to forget; the correctness test in the repo.",[3,10,11,12,13]],
+[24,"C","Multi-perspective generation with grounding","Generate opposing views, each claim linked to a source or marked unsupported (may reuse assignment 8).","Balance scores from classmates.","A 'both sides' explainer for local referendums; a pros/cons generator for purchase decisions; a debate trainer for students.","<code>POST /perspectives</code> returning two cases with per-claim source links; a web page over public topics.",[8,10,11,12,13]],
+[25,"D","LoRA fine-tune of a small model","Parameter-efficient SFT of a sub-1B or sub-3B model on 1,000 examples to match a hosted model on one narrow task; cost/quality curve against training-set size.","Served locally behind the same API, switchable by flag.","A niche-jargon translator (medical, legal, gaming); a style model for one newsletter; an on-device classifier for a mobile app.","An OpenAI-compatible <code>/v1/chat/completions</code> endpoint with <code>model=tuned|hosted</code>; adapter weights on Hugging Face, training data and script in the repo.",[6,7,9,10,14]],
+[26,"D","Synthetic data with quality control","LLM generation with diversity controls (entropy, dedup), filtering, then SFT on the result; measured against a hand-labelled set.","A data card and the gain versus real data.","Training data for a low-resource dialect chatbot; test cases for another team's app; realistic customer conversations for onboarding a support team.","The dataset published with a data card, <code>POST /generate</code> producing samples from a config, and the model trained on it behind an endpoint.",[2,7,9,10,11]],
+[27,"D","Serving and quantization benchmark","Same model via llama.cpp, vLLM and a hosted API; throughput, latency, cost and quality drift under quantization; explain results via KV-cache and attention costs; include speculative or non-autoregressive decoding as one variant.","A dashboard that re-runs nightly.","A public 'which model on which hardware' site for hobbyists; a cost calculator for indie AI apps; a Raspberry-Pi assistant with the best quantized model.","A public dashboard plus <code>GET /results</code> as JSON; benchmark harness and raw runs in the repo.",[5,8,10,14,15]],
+[28,"D","Tokenizer analysis and training","Compare tokenizers across languages and code (fertility, bits per byte, entropy), train a BPE tokenizer, quantify savings.","An interactive token and cost viewer.","A 'how much does your language cost' explorer; a domain tokenizer for chemistry or music notation; a token-budget plugin for a writing app.","A web page plus <code>POST /tokenize</code> returning tokens and cost per model, including the team's own tokenizer; tokenizer files in the repo.",[0,1,2,7,14]],
+[29,"D","Domain embedding fine-tune","Contrastive training of a sentence-embedding model on pairs mined from a corpus; retrieval gains versus off-the-shelf.","A similarity explorer.","Matching second-hand parts across listing sites; a 'similar cases' finder for a hobby law forum; song-lyric or poem similarity for a playlist tool.","<code>POST /embed</code> and <code>GET /similar?q=</code>, model selectable; weights on Hugging Face, mined pairs in the repo.",[3,6,10,12,14]],
+[30,"D","Observability for an LLM app","Tracing, cost accounting, prompt versioning, alerts; three simulated incidents with postmortems.","The stack running on another team's app.","A hosted monitoring service for indie AI apps; a cost-alert Telegram bot; an incident page for a student-run chatbot.","A public dashboard, <code>POST /ingest</code> for traces and a one-line SDK another team can drop in; the three postmortems in the repo.",[10,11,13,14]]
+];
+
+const chip=(i,extra="")=>`<span class="chip${extra}" style="--h:${HUES[i]}" data-t="${i}">${TOPICS[i]}</span>`;
+const counts=TOPICS.map((_,i)=>A.filter(a=>a[7].includes(i)).length);
+
+// topic dropdown + legend
+const topicSel=document.getElementById('topic');
+TOPICS.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${t} (${counts[i]})`;topicSel.appendChild(o)});
+document.getElementById('legend').innerHTML=TOPICS.map((t,i)=>`<span class="chip" style="--h:${HUES[i]}" data-t="${i}" role="button" tabindex="0">${t} · ${counts[i]}</span>`).join('');
+
+// list
+const list=document.getElementById('list');
+let html='';
+for(const tr of Object.keys(TRACKS)){
+  html+=`<h2 class="track" data-track="${tr}">Track ${tr} <small>${TRACKS[tr]}</small></h2>`;
+  for(const a of A.filter(x=>x[1]===tr)){
+    html+=`<details data-n="${a[0]}" data-track="${tr}" data-topics="${a[7].join(',')}">
+<summary><span class="n">${String(a[0]).padStart(2,'0')}</span><span class="t">${a[2]}</span><span class="chips">${a[7].map(i=>chip(i)).join('')}</span></summary>
+<div class="body">
+<div class="row"><b>Technique</b><div>${a[3]}</div></div>
+<div class="row"><b>Must show</b><div>${a[4]}</div></div>
+<div class="row"><b>Examples</b><div>${a[5]}</div></div>
+<div class="row"><b>Ships</b><div>${a[6]}</div></div>
+</div></details>`;
+  }
+}
+list.innerHTML=html;
+
+const trackSel=document.getElementById('track'),q=document.getElementById('q'),count=document.getElementById('count');
+function apply(){
+  const tr=trackSel.value,tp=topicSel.value,s=q.value.trim().toLowerCase();
+  let n=0;
+  document.querySelectorAll('#list details').forEach(d=>{
+    const ok=(!tr||d.dataset.track===tr)&&(!tp||d.dataset.topics.split(',').includes(tp))&&(!s||d.textContent.toLowerCase().includes(s));
+    d.hidden=!ok; if(ok)n++;
+  });
+  document.querySelectorAll('h2.track').forEach(h=>{h.hidden=!document.querySelector(`#list details[data-track="${h.dataset.track}"]:not([hidden])`)});
+  document.querySelectorAll('#legend .chip').forEach(c=>c.classList.toggle('active',c.dataset.t===tp));
+  count.textContent=`${n} of ${A.length}`;
+  let e=document.getElementById('empty'); if(!n&&!e){e=document.createElement('p');e.id='empty';e.className='empty';e.textContent='No assignment matches these filters.';list.appendChild(e)} else if(n&&e)e.remove();
+  try{localStorage.setItem('catalog-filters',JSON.stringify({tr,tp,s}))}catch(_){}
+}
+[trackSel,topicSel].forEach(el=>el.addEventListener('change',apply));
+q.addEventListener('input',apply);
+document.getElementById('legend').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;topicSel.value=topicSel.value===c.dataset.t?'':c.dataset.t;apply()});
+document.getElementById('legend').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.target.click()}});
+document.getElementById('expand').onclick=()=>document.querySelectorAll('#list details:not([hidden])').forEach(d=>d.open=true);
+document.getElementById('collapse').onclick=()=>document.querySelectorAll('#list details').forEach(d=>d.open=false);
+try{const f=JSON.parse(localStorage.getItem('catalog-filters')||'{}');if(f.tr)trackSel.value=f.tr;if(f.tp)topicSel.value=f.tp;if(f.s)q.value=f.s}catch(_){}
+apply();
+</script>
+
+</body></html>
